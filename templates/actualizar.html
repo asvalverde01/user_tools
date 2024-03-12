@@ -2,32 +2,115 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Actualizar Persona</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
   </head>
   <body>
-    <h1>Actualizar Persona</h1>
-    <form method="post" action="{{ url_for('actualizar', id=persona[0]) }}">
-      <label for="nombre">Nombre:</label>
-      <input
-        type="text"
-        id="nombre"
-        name="nombre"
-        value="{{ persona[1] }}"
-        required
-      />
-      <br />
-      <label for="edad">Edad:</label>
-      <input
-        type="number"
-        id="edad"
-        name="edad"
-        value="{{ persona[2] }}"
-        required
-      />
-      <br />
-      <button type="submit">Actualizar Persona</button>
-    </form>
+    <nav class="navbar">
+      <a class="navbar-brand" href="{{ url_for('index') }}">User Tools</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('crear') }}">Crear</a>
+        </li>
+      </ul>
+      <a class="logout-link" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+    </nav>
+
+    <div class="container mt-5">
+      <h1 class="text-center">Actualizar Persona</h1>
+      <form
+        method="post"
+        action="{{ url_for('actualizar', id=persona[0]) }}"
+        class="person-form"
+      >
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="form-control"
+            value="{{ persona[1] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido:</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            class="form-control"
+            value="{{ persona[2] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="cedula">Cedula:</label>
+          <input
+            type="number"
+            id="cedula"
+            name="cedula"
+            class="form-control"
+            value="{{ persona[3] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo:</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            class="form-control"
+            value="{{ persona[4] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+          <input
+            type="date"
+            id="fecha_nacimiento"
+            name="fecha_nacimiento"
+            class="form-control"
+            value="{{ persona[5] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="ubicacion">Ubicacion:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            class="form-control"
+            value="{{ persona[6] }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="area">Area:</label>
+          <input
+            type="text"
+            id="area"
+            name="area"
+            class="form-control"
+            value="{{ persona[7] }}"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Actualizar Persona
+        </button>
+      </form>
+    </div>
   </body>
 </html>

@@ -2,21 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Personas</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
   </head>
   <body>
-    <h1>Lista de Personas</h1>
-    <ul>
-      {% for persona in personas %}
-      <li>
-        {{ persona[1] }} - {{ persona[2] }}
-        <a href="{{ url_for('actualizar', id=persona[0]) }}">Actualizar</a>
-        <a href="{{ url_for('eliminar', id=persona[0]) }}">Eliminar</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <a href="{{ url_for('crear') }}">Agregar Persona</a>
+    <nav class="navbar">
+      <a class="navbar-brand" href="{{ url_for('index') }}">User Tools</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('crear') }}">Crear</a>
+        </li>
+      </ul>
+      <a class="logout-link" href="{{ url_for('logout') }}">Cerrar Sesión</a>
+    </nav>
+    <div class="main-container">
+      <div class="container mt-5">
+        <h2>Lista de Personas</h2>
+        <form
+          method="get"
+          action="{{ url_for('index') }}"
+          class="form-inline mt-3"
+        >
+          <div class="form-group">
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Buscar por nombre"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary ml-2">Buscar</button>
+        </form>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Cédula</th>
+              <th>Correo</th>
+              <th>Fecha de Nacimiento</th>
+              <th>Ubicación</th>
+              <th>Área</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for persona in personas %}
+            <tr>
+              <td>{{ persona[0] }}</td>
+              <td>{{ persona[1] }}</td>
+              <td>{{ persona[2] }}</td>
+              <td>{{ persona[3] }}</td>
+              <td>{{ persona[4] }}</td>
+              <td>{{ persona[5] }}</td>
+              <td>{{ persona[6] }}</td>
+              <td>{{ persona[7] }}</td>
+              <td>
+                <a
+                  href="{{ url_for('actualizar', id=persona[0]) }}"
+                  class="btn btn-warning btn-sm"
+                  >Actualizar</a
+                >
+                <a
+                  href="{{ url_for('eliminar', id=persona[0]) }}"
+                  class="btn btn-danger btn-sm"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="pagination">
+          {% if page > 1 %}
+          <a
+            href="{{ url_for('index', page=page-1) }}"
+            class="btn btn-primary btn-sm"
+            >&lt; Anterior</a
+          >
+          {% endif %}
+          <span class="current-page">{{ page }} de {{ total_pages }}</span>
+          {% if page < total_pages %}
+          <a
+            href="{{ url_for('index', page=page+1) }}"
+            class="btn btn-primary btn-sm"
+            >Siguiente &gt;</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </body>
 </html>
